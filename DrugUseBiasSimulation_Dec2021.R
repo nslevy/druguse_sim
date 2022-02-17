@@ -8,7 +8,7 @@ library(survey, quietly = T)
 library(srvyr, quietly= T)
 library(cowplot)
 
-setwd("/Users/nslevy/Documents/Columbia PhD/Misclassification of Drug Use")
+setwd("/PATH")
 options(scipen=999)
 rm(list = ls())
 
@@ -19,7 +19,7 @@ rm(list = ls())
 # Read in 2018 Census ACS Data Query, cleaned up a little bit in Excel because Census MDAT output is v. messy
 # Create labeled factor versions of numeric demographic variables
 raw.data <- 
-  read.csv("/Users/nslevy/Documents/Columbia PhD/Misclassification of Drug Use/Results/Census Custom Over 18_Clean.csv") %>%
+  read.csv("/PATH/Census Custom Over 18_Clean.csv") %>%
   mutate(SEX_FACT = factor(SEX, 
                            labels = c("Male","Female")),
          AGE_FACT = factor(AGE, 
@@ -66,7 +66,7 @@ census.data <-
 
 # Read in and recode 2018 NSDUH Data
 nsduh2018 <-
-  read.csv(file = "/Users/nslevy/Documents/Columbia PhD/Silvia/NSDUH/Data/NSDUH_2018_Tab.tsv", sep = "\t") %>%
+  read.csv(file = "/PATH/NSDUH_2018_Tab.tsv", sep = "\t") %>%
   rename_all(toupper) %>%
   filter(CATAG3 > 1) %>%
   select(QUESTID2, IRSEX, IREDUHIGHST2, CATAG3, NEWRACE2, ILLYR, MRJYR, MRJMON, COCYR, COCMON, 
@@ -260,12 +260,12 @@ sim.data.final <-
 
 # Save files
 write.csv(sim.data.final, file = "simdatafinal.csv", row.names = FALSE)
-save(sim.data.final, file = "/Users/nslevy/Documents/Columbia PhD/Misclassification of Drug Use/simdatafinal.RData")
-save(census.data, file = "/Users/nslevy/Documents/Columbia PhD/Misclassification of Drug Use/censusdata.RData")
-save(census.drug, file = "/Users/nslevy/Documents/Columbia PhD/Misclassification of Drug Use/censusdrug.RData")
-save(nsduh.pop, file = "/Users/nslevy/Documents/Columbia PhD/Misclassification of Drug Use/nsduhpop.RData")
-save(mj.pop, file = "/Users/nslevy/Documents/Columbia PhD/Misclassification of Drug Use/mj.pop.RData")
-save(cocaine.pop, file = "/Users/nslevy/Documents/Columbia PhD/Misclassification of Drug Use/cocaine.pop.RData")
+save(sim.data.final, file = "/PATH/simdatafinal.RData")
+save(census.data, file = "/PATH/censusdata.RData")
+save(census.drug, file = "/PATH/censusdrug.RData")
+save(nsduh.pop, file = "/PATH/nsduhpop.RData")
+save(mj.pop, file = "/PATH/mj.pop.RData")
+save(cocaine.pop, file = "/PATH/cocaine.pop.RData")
 
 #######################################
 # 6 - Examples of correcting the bias #
@@ -1016,7 +1016,7 @@ power.sim <-
   bind_rows(power.data) %>%
   group_by(n)
 
-save(power.sim, file = "/Users/nslevy/Documents/Columbia PhD/Misclassification of Drug Use/power.sim.RData")
+save(power.sim, file = "/PATH/power.sim.RData")
 
 (mj.power.plot <-
     ggplot(data = power.sim,
